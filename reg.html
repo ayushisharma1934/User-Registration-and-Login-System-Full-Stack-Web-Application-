@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<form class="box" onsubmit="return validateForm()" action="register.php" method="POST">
+    <h2>Sign Up</h2>
+
+    <input type="text" id="name" name="name" placeholder="Name">
+    <input type="text" id="phone" name="phone" placeholder="Phone">
+    <input type="email" id="email" name="email" placeholder="Email">
+    <input type="number" id="age" name="age" placeholder="Age">
+    <input type="password" id="password" name="password" placeholder="Password">
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+function validateForm() {
+
+    var name = document.getElementById("name").value;
+    var phone = document.getElementById("phone").value;
+    var email = document.getElementById("email").value;
+    var age = document.getElementById("age").value;
+    var password = document.getElementById("password").value;
+
+    // Empty check
+    if (name == "" || phone == "" || email == "" || age == "" || password == "") {
+        alert("All fields are required");
+        return false;
+    }
+
+    // Phone validation
+    if (phone.length != 10 || isNaN(phone)) {
+        alert("Phone number must be 10 digits");
+        return false;
+    }
+
+    // Age validation
+    if (age < 18) {
+        alert("Age must be 18 or above");
+        return false;
+    }
+
+    // Email validation
+    var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+        alert("Invalid email format");
+        return false;
+    }
+
+    // Password validation
+    var passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+    if (!password.match(passPattern)) {
+        alert("Password must contain uppercase, lowercase, number, special character & minimum 8 characters");
+        return false;
+    }
+
+    return true;
+}
+</script>
+
+</body>
+</html>
